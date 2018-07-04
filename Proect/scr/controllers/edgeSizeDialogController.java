@@ -40,7 +40,8 @@ public class edgeSizeDialogController {
         int weight;
         if (isDigit(text)) {
             weight = Integer.parseInt(text);
-            if (weight > 0) {
+            // can work with weights < 0
+            if (weight > -1000000) {
                 edgeWeight = (int) weight;
                 createEdgeFixedSize();
                 mainController.shouldGenerate = false;
