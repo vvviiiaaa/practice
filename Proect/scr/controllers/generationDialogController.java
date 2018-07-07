@@ -33,7 +33,9 @@ public class generationDialogController {
 
     public void gdOK(ActionEvent actionEvent) {
         System.out.println("Ok was pressed");
+        mainController.appendText("Ok was pressed\n");
         System.out.println("Text " + generationText.getText() + " was entered.");
+        mainController.appendText("Text " + generationText.getText() + " was entered.\n");
         String text = generationText.getText();
         int n;
         if (isDigit(text)) {
@@ -80,7 +82,8 @@ public class generationDialogController {
     }
 
     public void gdCancel(ActionEvent actionEvent) {
-        System.out.println("Cancle was pressed");
+        System.out.println("Cancel was pressed");
+        mainController.appendText("Cancel was pressed\n");
         mainController.shouldGenerate = false;
         mainController.generationType = false;
                 ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();

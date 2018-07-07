@@ -35,7 +35,9 @@ public class edgeSizeDialogController {
 
     public void edgeSizeOK(ActionEvent actionEvent) {
         System.out.println("Ok was pressed");
+        mainController.appendText("Ok was pressed\n");
         System.out.println("Text " + edgeSize.getText() + " was entered.");
+        mainController.appendText("Text " + edgeSize.getText() + " was entered.\n");
         String text = edgeSize.getText();
         int weight;
         if (isDigit(text)) {
@@ -80,7 +82,8 @@ public class edgeSizeDialogController {
     }
 
     public void edgeSizeCancel(ActionEvent actionEvent) {
-        System.out.println("Cancle was pressed");
+        System.out.println("Cancel was pressed");
+        mainController.appendText("Cancel was pressed\n");
         mainController.edges.get(mainController.edges.size() - 1).isChecked = true;
         mainController.deleteEdge();
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
@@ -88,6 +91,7 @@ public class edgeSizeDialogController {
 
     private void createEdgeFixedSize()  {
         System.out.println("Create edge");
+        mainController.appendText("Create edge\n");
         double weight = edgeWeight;
         mainController.activePane.getChildren().remove(mainController.edges.get(mainController.edges.size() - 1).txtWeight);
         mainController.edges.get(mainController.edges.size() - 1).setWeight(weight);

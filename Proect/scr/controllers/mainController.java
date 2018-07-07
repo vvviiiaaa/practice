@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,15 +9,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import static java.lang.Math.sqrt;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 
@@ -90,6 +90,42 @@ public class mainController {
     public static Button ResultBut;
 
     @FXML
+    private static TextArea console;
+//    private PrintStream ps = new PrintStream(new Console(console));
+
+//    public class Console extends OutputStream {
+//        private TextArea console;
+//
+//        public Console(TextArea console) {
+//            this.console = console;
+//        }
+////
+////        private class qwe implements Runnable {
+////            String valueOf;
+////                qwe(String str) {
+////                valueOf = str;
+////            }
+////            public void run () {
+////                console.appendText(valueOf);
+////            }
+////        }
+////
+//
+//
+//
+//
+//
+//        public void write(int b) throws IOException {
+//            appendText(String.valueOf((char)b));
+//        }
+//    }
+
+    public static void appendText(String valueOf) {
+//            Platform.runLater(new qwe(valueOf));
+        console.appendText(valueOf);
+    }
+
+    @FXML
     public static Button FixedEdgesBut;
     public void createButton (MouseEvent event) throws IOException  {
         if (!pressed) {
@@ -104,7 +140,7 @@ public class mainController {
 
     private void twoMouseClick(MouseEvent event)
     {
-        if (createOnCorrectPlace(event)) { //если тыкнул в правильном месте
+        if (createOnCorrectPlace(event)) { //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             if (Vertex.i == 0)
                 GotovoBut.setDisable(false);
             ImageView image = new ImageView("content/drt1.png");
@@ -113,7 +149,7 @@ public class mainController {
             vertex.circle.setY(event.getY() - 25);
             vertex.setNumber();
             buttons.add(vertex);
-            activePane.getChildren().addAll(vertex.circle, vertex.txt);//добавил вершину
+            activePane.getChildren().addAll(vertex.circle, vertex.txt);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             vertex.circle.toFront();
         }
 
@@ -169,6 +205,7 @@ public class mainController {
 
     private void createEdge(Vertex[] vertexes, MouseEvent event) throws IOException {
         System.out.println("Create edge");
+        appendText("Create edge\n");
         double weight = 0;
         if (fixedSizeType)
             callEdgeSizeWindow(event);
@@ -186,6 +223,7 @@ public class mainController {
              activePane.getChildren().remove(edges.get(edges.size() - 1).txtWeight);
             edge.line.toBack();
             System.out.println(edge.getWeight());
+            appendText(String.valueOf(edge.getWeight()) + "\n");
 
     }
 
@@ -240,8 +278,10 @@ public class mainController {
                     vertexesToFront();
                     //edges.get(i).line.setStyle("-fx-stroke:red");
                     System.out.println("Weight of this edge = " + edges.get(i).getWeight());
+                    appendText("Weight of this edge = " + edges.get(i).getWeight() + "\n");
                     shpEdgesCounter++;
                     System.out.println(shpEdgesCounter);
+                    mainController.appendText(String.valueOf(shpEdgesCounter) + "\n");
                     edges.get(i).isChecked = true;
                 }
                 else
@@ -315,6 +355,8 @@ public class mainController {
                 GotovoBut.setDisable(true);
             createButton(event);
             System.out.println("shouldBuild = true!");
+            mainController.appendText("shouldBuild = true!\n");
+
         }
         else
         if (fordInWork)
@@ -344,8 +386,10 @@ public class mainController {
             checkStartVert(event);
 
         }
-        else
+        else {
             System.out.println("shouldBuild = false!");
+            mainController.appendText("shouldBuild = false!\n");
+        }
     }
 
     public void endBuilding(ActionEvent actionEvent) {
@@ -403,15 +447,18 @@ public class mainController {
                     ResultBut.setDisable(true);
             }
             System.out.println("shouldGenerate = true!");
+            mainController.appendText("shouldGenerate = true!\n");
         }
-        else
+        else {
             System.out.println("shouldGenerate = false!");
+            mainController.appendText("shouldGenerate = false!\n");
+        }
     }
 
     public void generation(ActionEvent actionEvent) throws Exception{
         Stage stage = new Stage();
         Parent panel = FXMLLoader.load(getClass().getResource("../fxml/generationDialog.fxml"));
-        stage.setTitle("Случайная генерация");
+        stage.setTitle("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         stage.setMinWidth(200);
         stage.setMinHeight(150);
         stage.setResizable(false);
@@ -476,6 +523,7 @@ public class mainController {
             nextStep = true;
            // StepBut.setDisable(true);
             System.out.println("calling cycleFord");
+            mainController.appendText("calling cycleFord\n");
             for (int i = 0; i < edges.size(); i++) {
                 edges.get(i).line.setStyle("-fx-stroke:black");
                 edges.get(i).drawAllLines("black",2);
@@ -548,6 +596,7 @@ public class mainController {
                     counter = 0;
                     cycleCounter++;
                     System.out.println(cycleCounter + " - cycleCounter");
+                    mainController.appendText(cycleCounter + " - cycleCounter\n");
                     cycle = true;
                 }
             }
@@ -606,6 +655,7 @@ public class mainController {
                     for (int y = 0; y < n; y++)
                     {
                         System.out.println(s + "->" + y + ":" + (vec.get(y)!= INFINITE ?(vec.get(y)): " none"));
+                        mainController.appendText(s + "->" + y + ":" + (vec.get(y)!= INFINITE ?(vec.get(y)): " none") + "\n");
                     }
                 }
         else {
@@ -621,7 +671,9 @@ public class mainController {
 
     public void deleteButton(ActionEvent actionEvent) {
         if(buttons.size()==0){
-            System.out.println("No Vertexes!");
+            System.out.println("No Vertices!");
+            mainController.appendText("No Vertices!\n");
+
             return;
         }
         deleteVertex();
@@ -744,19 +796,28 @@ public class mainController {
                 for (int i = 0; i < edges.size(); i++) {
                     if (edges.get(i).getV1().circle.getX() == currentVertex.circle.getX() && edges.get(i).getV1().circle.getY() == currentVertex.circle.getY()) {
                         edges.get(i).syncronize(currentVertex, edges.get(i).getV2(),generationType);
-                        System.out.println("Edge" + i + "was syncronized");
+                        System.out.println("Edge" + i + "was synchronized");
+                        mainController.appendText("Edge" + i + "was synchronized\n");
                         System.out.println(edges.get(i).getV1().circle.getX() + " = x1, " + edges.get(i).getV2().circle.getX() + " = x2"
                         + " "+ edges.get(i).getWeight());
+                        mainController.appendText(edges.get(i).getV1().circle.getX() + " = x1, " + edges.get(i).getV2().circle.getX() + " = x2"
+                                + " "+ edges.get(i).getWeight() + "\n");
+
                     }
                     else {
                         if (edges.get(i).getV2().circle.getX() == currentVertex.circle.getX() && edges.get(i).getV2().circle.getY() == currentVertex.circle.getY()) {
                             edges.get(i).syncronize(edges.get(i).getV1(), currentVertex, generationType);
-                            System.out.println("Edge" + i + "was syncronized");
+                            System.out.println("Edge" + i + "was synchronized");
+                            mainController.appendText("Edge" + i + "was synchronized\n");
                             System.out.println(edges.get(i).getV1().circle.getX() + " = x1, " + edges.get(i).getV2().circle.getX() + " = x2"
                                     + " " + edges.get(i).getWeight());
+                            mainController.appendText(edges.get(i).getV1().circle.getX() + " = x1, " + edges.get(i).getV2().circle.getX() + " = x2"
+                                    + " " + edges.get(i).getWeight() + "\n");
                         }
                     }
                     System.out.println("numb of edges = " + edges.size());
+                    mainController.appendText("numb of edges = " + edges.size() + "\n");
+
                 }
             }
         }
@@ -823,6 +884,8 @@ public class mainController {
         for (int y = 0; y < n; y++)
         {
             System.out.println(s + "->" + y + ":" + (vec.get(y)!= INFINITE ?(vec.get(y)): " none"));
+            mainController.appendText(s + "->" + y + ":" + (vec.get(y)!= INFINITE ?(vec.get(y)): " none") + "\n");
+
         }
 
         for (int i = 0; i < edges.size(); i++) {
@@ -907,7 +970,7 @@ public class mainController {
     public void callEdgeSizeWindow (Event actionEvent)throws IOException{
         Stage stage = new Stage();
         Parent panel = FXMLLoader.load(getClass().getResource("../fxml/edgeSizeDialog.fxml"));
-        stage.setTitle("Ввод веса ребра");
+        stage.setTitle("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
         stage.setMinWidth(200);
         stage.setMinHeight(150);
         stage.setResizable(false);
