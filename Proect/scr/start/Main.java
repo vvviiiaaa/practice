@@ -13,7 +13,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../fxml/mainInterface.fxml"));
             primaryStage.setTitle("GraphCreator MVS");
-            primaryStage.setScene(new Scene(root, 800, 600));
+            primaryStage.setScene(new Scene(root, 800, 800));
             primaryStage.setMinHeight(600);
             primaryStage.setMinWidth(800);
             primaryStage.show();
