@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="379.0" style="-fx-background-color: lightsteelblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.generationDialogController">
+   <children>
+      <HBox minHeight="40.0" prefHeight="71.0" prefWidth="379.0">
+         <children>
+            <Label text="Введите число вершин n:">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="24.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="generationText" blendMode="SRC_ATOP" promptText="n = " style="-fx-background-color: white;">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox minHeight="45.0" prefHeight="62.0" prefWidth="379.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#gdOK" prefHeight="37.0" prefWidth="90.0" text="ОК">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="80.0" right="20.0" top="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#gdCancel" prefHeight="37.0" prefWidth="90.0" text="Отмена">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
